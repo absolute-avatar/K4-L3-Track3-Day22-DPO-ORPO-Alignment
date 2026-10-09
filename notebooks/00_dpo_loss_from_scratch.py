@@ -60,7 +60,14 @@ print(f"sum log p = {total.item():.3f}   mean log p = {mean.item():.3f}")
 def my_dpo_loss(pc, pr, rc, rr, beta=0.1):
     """pc/pr: policy log-prob chosen/rejected; rc/rr: reference. Trả về loss trung bình."""
     # TODO: viết bằng torch.nn.functional.logsigmoid
-    return None
+    # So với reference, policy tăng/giảm log-prob của mỗi câu trả lời bao nhiêu.
+    chosen_log_ratio = pc - rc
+    rejected_log_ratio = pr - rr
+    # Margin đo mức ưu tiên chosen hơn rejected; beta điều chỉnh độ lớn margin.
+    margin = beta * (chosen_log_ratio - rejected_log_ratio)
+    # logsigmoid ổn định số hơn log(sigmoid(...)); lấy trung bình loss trên batch.
+    # Giữ phép tính bằng tensor để autograd tính được gradient khi huấn luyện.
+    return -torch.nn.functional.logsigmoid(margin).mean()
 
 
 # %%

@@ -1,0 +1,6 @@
+         eval_reward_accuracy eval_chosen_reward eval_rejected_reward mean_output_chars                diagnosis                             start eval_log_odds_ratio
+dpo                      0.64            0.08685              0.06123             391.9                 INTENDED                               NaN                 NaN
+rpo                      0.61           0.553003              0.51822            392.35                 INTENDED                               NaN                 NaN
+dpo_norm                 0.62          -0.184599            -0.193309            393.85  LIKELIHOOD DISPLACEMENT                               NaN                 NaN
+ld_dpo                   0.55           -0.13305            -0.157854            394.15  LIKELIHOOD DISPLACEMENT                               NaN                 NaN
+orpo                     0.64                NaN                  NaN             390.5                      NaN  /content/lab22/models/sft-merged           -0.624976
